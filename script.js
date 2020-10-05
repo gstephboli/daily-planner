@@ -1,5 +1,6 @@
 $(document).ready(function () {
   console.log("This is loading");
+  //   console.log(moment());
   // DOM var
   var presentDate = $("#currentDay");
   var plannerDiv = $(".container");
@@ -23,7 +24,7 @@ $(document).ready(function () {
 
   for (var i = 0; i < time.length; i++) {
     var hourRow = $("<row></row>");
-    hourRow.addClass("row time-block");
+    hourRow.addClass("row");
     hourRow.attr("data-time", time[i]);
     hourRow.text(time[i]);
     $(".container").append(hourRow);
@@ -37,15 +38,25 @@ $(document).ready(function () {
   textArea.add("text form-control");
   $(".input-group").append(textArea);
 
-    var saveEl = $("<div></div>");
-    saveEl.addClass("col-sm-1 input-group-append");
-    $(".row").append(saveEl);
+  var saveEl = $("<div></div>");
+  saveEl.addClass("col-sm-1 input-group-append");
+  $(".row").append(saveEl);
 
   var saveBtn = $("<button></button>");
   saveBtn.addClass(
     'class="btn btn-outline-secondary saveBtn fas fa-save" type="button-addon2"'
   );
   $(".input-group-append").append(saveBtn);
+
+  if (hourRow) {
+    if (time === hourRow) {
+      addClass("present");
+    } else if (time < hourRow) {
+      addClass("future");
+    } else if (time > hourRow) {
+      addClass("past");
+    }
+  }
 
   //   function calls
 
