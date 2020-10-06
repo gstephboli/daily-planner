@@ -1,64 +1,79 @@
 $(document).ready(function () {
   console.log("This is loading");
+  //   console.log(window);
   //   console.log(moment());
-  // DOM var
+
   var presentDate = $("#currentDay");
   var plannerDiv = $(".container");
 
-  // JS var
-  var plannerTable = $("<form></form>");
+//   var storedText = JSON.parse(localStorage.getItem("userInput"));
+
   var time = [
-    "9AM  ",
-    "10AM",
-    "11AM",
-    "12PM",
-    "1PM  ",
-    "2PM  ",
-    "3PM  ",
-    "4PM  ",
-    "5PM  ",
+    { timeString: "9AM", timeNumber: 9 },
+    { timeString: "10AM", timeNumber: 10 },
+    { timeString: "11AM", timeNumber: 11 },
+    { timeString: "12PM", timeNumber: 12 },
+    { timeString: "1PM", timeNumber: 1 },
+    { timeString: "2PM", timeNumber: 2 },
+    { timeString: "3PM", timeNumber: 3 },
+    { timeString: "4PM", timeNumber: 4 },
+    { timeString: "5PM", timeNumber: 5 },
   ];
 
-  // function defs
-  presentDate.text(moment().format("dddd " + "LL"));
+  presentDate.text(moment().format("dddd " + "MMMM Do"));
 
   for (var i = 0; i < time.length; i++) {
-    var hourRow = $("<row></row>");
-    hourRow.addClass("row");
-    hourRow.attr("data-time", time[i]);
-    hourRow.text(time[i]);
+    var hourRow = $("<div>");
+    hourRow.attr("class", "row");
+    // hourRow.attr("data-time", time[i]);
+    // hourRow.text(JSON.stringify(time[i]));
     $(".container").append(hourRow);
+
+    var timeSlot = $("<div>");
+    timeSlot.attr("class", "hour col-sm-1 ");
+    $(hourRow).append(timeSlot);
+
+    var timeDisplay = $("<span>");
+    timeDisplay.attr("data-time", time[i]);
+    timeDisplay.text(time.timeString);
+    $(timeSlot).append(timeDisplay);
   }
 
-  var textDisplay = $("<div></div>");
-  textDisplay.addClass("col-sm-10 input-group mb-3");
+  var textDisplay = $("<textarea>");
+  textDisplay.attr("class", "description col-sm-10 ");
   $(".row").append(textDisplay);
 
-  var textArea = $("<textarea></textarea>");
-  textArea.add("text form-control");
-  $(".input-group").append(textArea);
+  //   var textArea = $("<textarea>");
+  //   textArea.add("text form-control");
+  //   $(".input-group").append(textArea);
 
-  var saveEl = $("<div></div>");
-  saveEl.addClass("col-sm-1 input-group-append");
-  $(".row").append(saveEl);
+  //   var saveEl = $("<div></div>");
+  //   saveEl.addClass("col-sm-1 input-group-append");
+  //   $(".row").append(saveEl);
 
-  var saveBtn = $("<button></button>");
-  saveBtn.addClass(
-    'class="btn btn-outline-secondary saveBtn fas fa-save" type="button-addon2"'
-  );
-  $(".input-group-append").append(saveBtn);
+  var saveBtn = $("<button>");
+  saveBtn.attr("class", "saveBtn col-sm-1 fas fa-save");
+  $(".row").append(saveBtn);
 
-  if (hourRow) {
-    if (time === hourRow) {
-      addClass("present");
-    } else if (time < hourRow) {
-      addClass("future");
-    } else if (time > hourRow) {
-      addClass("past");
-    }
+  var currentHour = parseInt(time.timeNumber);
+  if (currentHour === parseInt(presentDate)) {
+    textDisplay.addClass("present");
+  } else if (currentHour <= parseInt(presentDate)) {
+    textDisplay.addClass("past");
+  } else {
+    textDisplay.addClass("future");
   }
 
-  //   function calls
+  $(".saveBtn").on("click", function () {
+    console.log("info saved!");
+    var value = $(this).siblings(".description").val();
+    // var time = $(this).parent().attr("id");
+    localStorage.setItem("userInput", value);
+    // localStorage.setItem("userInput", time);
+    // localStorage.setItem("userInput", JSON.stringify($("textarea")));
+    // localStorage.getItem("textarea");
+    //    localStorage.plannerDiv = JSON.stringify(textDisplay);
+  });
 
-  //   event listeners
+//   $("#9 .description").val(localStorage.getItem("9"));
 });
