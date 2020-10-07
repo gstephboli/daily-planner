@@ -6,8 +6,8 @@ $(document).ready(function () {
   var presentDate = $("#currentDay");
   var plannerDiv = $(".container");
 
-//   var storedText = JSON.parse(localStorage.getItem("userInput"));
-
+  //   var storedText = JSON.parse(localStorage.getItem("userInput"));
+  // var storedSchedule;
   var time = [
     { timeString: "9AM", timeNumber: 9 },
     { timeString: "10AM", timeNumber: 10 },
@@ -25,8 +25,6 @@ $(document).ready(function () {
   for (var i = 0; i < time.length; i++) {
     var hourRow = $("<div>");
     hourRow.attr("class", "row");
-    // hourRow.attr("data-time", time[i]);
-    // hourRow.text(JSON.stringify(time[i]));
     $(".container").append(hourRow);
 
     var timeSlot = $("<div>");
@@ -34,46 +32,37 @@ $(document).ready(function () {
     $(hourRow).append(timeSlot);
 
     var timeDisplay = $("<span>");
-    timeDisplay.attr("data-time", time[i]);
-    timeDisplay.text(time.timeString);
+    timeDisplay.attr("data-time", time[i].timeNumber);
+    timeDisplay.text(time[i].timeString);
     $(timeSlot).append(timeDisplay);
+
+    var textDisplay = $("<textarea>");
+    textDisplay.attr("class", "description col-sm-10 ");
+    $(".row").append(textDisplay);
+
+    var saveBtn = $("<button>");
+    saveBtn.attr("class", "saveBtn col-sm-1 fas fa-save");
+    $(".row").append(saveBtn);
+
+    var currentHour = moment().format("h a");
+    console.log(currentHour);
+    console.log(time[i].timeNumber);
+    if (currentHour === time[i].timeNumber) {
+      textDisplay.addClass("present");
+    } else if (currentHour <= time[i].timeNumber) {
+      textDisplay.addClass("past");
+    } else {
+      textDisplay.addClass("future");
+    }
   }
 
-  var textDisplay = $("<textarea>");
-  textDisplay.attr("class", "description col-sm-10 ");
-  $(".row").append(textDisplay);
+//   $(".saveBtn").on("click", function (event) {
+//     event.preventDefault();
+//     console.log("info saved!");
+//     var value = $(this).siblings(".description").val();
+//     localStorage.setItem("userInput", value);
+//     // localStorage.setItem("userInput", JSON.stringify($("textarea")));
+//   });
 
-  //   var textArea = $("<textarea>");
-  //   textArea.add("text form-control");
-  //   $(".input-group").append(textArea);
-
-  //   var saveEl = $("<div></div>");
-  //   saveEl.addClass("col-sm-1 input-group-append");
-  //   $(".row").append(saveEl);
-
-  var saveBtn = $("<button>");
-  saveBtn.attr("class", "saveBtn col-sm-1 fas fa-save");
-  $(".row").append(saveBtn);
-
-  var currentHour = parseInt(time.timeNumber);
-  if (currentHour === parseInt(presentDate)) {
-    textDisplay.addClass("present");
-  } else if (currentHour <= parseInt(presentDate)) {
-    textDisplay.addClass("past");
-  } else {
-    textDisplay.addClass("future");
-  }
-
-  $(".saveBtn").on("click", function () {
-    console.log("info saved!");
-    var value = $(this).siblings(".description").val();
-    // var time = $(this).parent().attr("id");
-    localStorage.setItem("userInput", value);
-    // localStorage.setItem("userInput", time);
-    // localStorage.setItem("userInput", JSON.stringify($("textarea")));
-    // localStorage.getItem("textarea");
-    //    localStorage.plannerDiv = JSON.stringify(textDisplay);
-  });
-
-//   $("#9 .description").val(localStorage.getItem("9"));
+  //   $("#9 .description").val(localStorage.getItem("9"));
 });
