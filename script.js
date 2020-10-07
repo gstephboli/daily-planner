@@ -1,13 +1,10 @@
 $(document).ready(function () {
-  console.log("This is loading");
-  //   console.log(window);
-  //   console.log(moment());
 
+// DOM variables from HTML
   var presentDate = $("#currentDay");
   var plannerDiv = $(".container");
-
-  // var storedText = JSON.parse(localStorage.getItem("userInput"));
-  // var storedSchedule;
+// Array of time to display on the scheduler
+// and use for time reference
   var time = [
     { timeString: "9AM", timeNumber: 9 },
     { timeString: "10AM", timeNumber: 10 },
@@ -19,9 +16,10 @@ $(document).ready(function () {
     { timeString: "4PM", timeNumber: 16 },
     { timeString: "5PM", timeNumber: 17 },
   ];
-
+// Setting the current day of the week and date in the header
   presentDate.text(moment().format("dddd " + "MMMM Do"));
-
+// For loop that has my dynamically created row with 
+// 3 columns. Including a time, text area and save button for text area.
   for (var i = 0; i < time.length; i++) {
     var hourRow = $("<div>");
     hourRow.attr("class", "row");
@@ -39,8 +37,6 @@ $(document).ready(function () {
     var textDisplay = $("<textarea>");
     textDisplay.attr("class", "description col-sm-10 ");
     textDisplay.attr("id", "text" + time[i].timeNumber);
-    console.log("text" + time[i].timeNumber)
-    console.log( localStorage.getItem("text" + time[i].timeNumber))
     textDisplay.val(localStorage.getItem("text" + time[i].timeNumber));
     $(hourRow).append(textDisplay);
 
@@ -48,10 +44,9 @@ $(document).ready(function () {
     btnDiv.attr("class", "saveBtn col-sm-1 fas fa-save");
     btnDiv.attr("id", "save" + time[i].timeNumber);
     $(hourRow).append(btnDiv);
-
+// if/else statement so the css allows the user to know where in the time of day they are in
+// time is set in military time
     var currentHour = parseInt(moment().format("H"));
-    console.log(currentHour);
-    console.log(time[i].timeNumber);
     if (currentHour > parseInt(time[i].timeNumber)) {
       textDisplay.addClass("past");
     } else if (currentHour < parseInt(time[i].timeNumber)) {
@@ -60,15 +55,10 @@ $(document).ready(function () {
       textDisplay.addClass("present");
     }
   }
-
+// Event listener for save button that will keep information in local storage
   $(".saveBtn").on("click", function (event) {
-    console.log("this is working");
-    // event.target.id.replace("save");
     var ret = event.target.id.replace("save", "text");
-    console.log(ret);
     var task = $("#"+ret).val();
-    console.log(task);
     localStorage.setItem(ret , task);
-    // localStorage.setItem(ret, task);
   });
 });
