@@ -13,11 +13,11 @@ $(document).ready(function () {
     { timeString: "10AM", timeNumber: 10 },
     { timeString: "11AM", timeNumber: 11 },
     { timeString: "12PM", timeNumber: 12 },
-    { timeString: "1PM", timeNumber: 1 },
-    { timeString: "2PM", timeNumber: 2 },
-    { timeString: "3PM", timeNumber: 3 },
-    { timeString: "4PM", timeNumber: 4 },
-    { timeString: "5PM", timeNumber: 5 },
+    { timeString: "1PM", timeNumber: 13 },
+    { timeString: "2PM", timeNumber: 14 },
+    { timeString: "3PM", timeNumber: 15 },
+    { timeString: "4PM", timeNumber: 16 },
+    { timeString: "5PM", timeNumber: 17 },
   ];
 
   presentDate.text(moment().format("dddd " + "MMMM Do"));
@@ -44,15 +44,15 @@ $(document).ready(function () {
     saveBtn.attr("class", "saveBtn col-sm-1 fas fa-save");
     $(".row").append(saveBtn);
 
-    var currentHour = moment().format("h a");
+    var currentHour = parseInt(moment().format("H"));
     console.log(currentHour);
     console.log(time[i].timeNumber);
-    if (currentHour === time[i].timeNumber) {
-      textDisplay.addClass("present");
-    } else if (currentHour <= time[i].timeNumber) {
+    if (currentHour > parseInt(time[i].timeNumber)) {
       textDisplay.addClass("past");
-    } else {
+    } else if (currentHour < parseInt(time[i].timeNumber)) {
       textDisplay.addClass("future");
+    } else {
+      textDisplay.addClass("present");
     }
   }
 
