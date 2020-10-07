@@ -6,7 +6,7 @@ $(document).ready(function () {
   var presentDate = $("#currentDay");
   var plannerDiv = $(".container");
 
-    // var storedText = JSON.parse(localStorage.getItem("userInput"));
+  // var storedText = JSON.parse(localStorage.getItem("userInput"));
   // var storedSchedule;
   var time = [
     { timeString: "9AM", timeNumber: 9 },
@@ -38,10 +38,15 @@ $(document).ready(function () {
 
     var textDisplay = $("<textarea>");
     textDisplay.attr("class", "description col-sm-10 ");
+    textDisplay.attr("id", "text" + time[i].timeNumber);
+    console.log("text" + time[i].timeNumber)
+    console.log( localStorage.getItem("text" + time[i].timeNumber))
+    textDisplay.val(localStorage.getItem("text" + time[i].timeNumber));
     $(hourRow).append(textDisplay);
 
     var btnDiv = $("<div>");
     btnDiv.attr("class", "saveBtn col-sm-1 fas fa-save");
+    btnDiv.attr("id", "save" + time[i].timeNumber);
     $(hourRow).append(btnDiv);
 
     var currentHour = parseInt(moment().format("H"));
@@ -56,16 +61,14 @@ $(document).ready(function () {
     }
   }
 
-//   function savedText() {
-//     var storedText = JSON.parse(localStorage.getItem("userInput"));
-//     localStorage.setItem("userInput", $(".description"));
-//   }
-
-//     $(".saveBtn").on("click", function (event) {
-//     console.log("this is working");
-//     event.preventDefault();
-//     savedText();
-//     });
-
-  //   $("#9 .description").val(localStorage.getItem("9"));
+  $(".saveBtn").on("click", function (event) {
+    console.log("this is working");
+    // event.target.id.replace("save");
+    var ret = event.target.id.replace("save", "text");
+    console.log(ret);
+    var task = $("#"+ret).val();
+    console.log(task);
+    localStorage.setItem(ret , task);
+    // localStorage.setItem(ret, task);
+  });
 });
