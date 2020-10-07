@@ -35,15 +35,16 @@ $(document).ready(function () {
     $(timeSlot).append(timeDisplay);
 
     var textDisplay = $("<textarea>");
-    textDisplay.attr("class", "description col-sm-10 ");
+    textDisplay.attr("class", "description col-sm-10");
     textDisplay.attr("id", "text" + time[i].timeNumber);
     textDisplay.val(localStorage.getItem("text" + time[i].timeNumber));
     $(hourRow).append(textDisplay);
 
     var btnDiv = $("<div>");
-    btnDiv.attr("class", "saveBtn col-sm-1 fas fa-save");
+    btnDiv.attr("class", "saveBtn col-sm-1 fas fa-save time-block");
     btnDiv.attr("id", "save" + time[i].timeNumber);
     $(hourRow).append(btnDiv);
+
 // if/else statement so the css allows the user to know where in the time of day they are in
 // time is set in military time
     var currentHour = parseInt(moment().format("H"));
