@@ -8,7 +8,7 @@ The second issue I had was setting up my local storage. After speaking with my t
 
 ## Installation
 
-Fork repository at [gstephboli github](https://github.com/gstephboli/daily-planner) .
+Fork repository at [gstephbolivar github](https://github.com/gstephbolivar/daily-planner) .
 
 Clone repository to local terminal.
 
@@ -18,7 +18,7 @@ Happy editing!
 
 ## Usage
 
-This [website] (https://gstephboli.github.io/daily-planner/)allows a user to have a daily planner in which they can add, replace and erase information. It also allows the user to know what time they are in. If the time is in the past then the row will be grey, if the time is in the current hour then the row will be red and if the time is in the future then the row will be green. 
+This [website] (https://gstephbolivar.github.io/daily-planner/)allows a user to have a daily planner in which they can add, replace and erase information. It also allows the user to know what time they are in. If the time is in the past then the row will be grey, if the time is in the current hour then the row will be red and if the time is in the future then the row will be green. 
 
 ![MainPage](./images/mainpage.png)
 ![TimeSlots](./images/TimeSlots.png)
@@ -35,6 +35,10 @@ I credit the following people/websites:
 [FontAwesome] (https://fontawesome.com/icons/save?style=solid) For the save favicon.
 
 [StackOverflow] (https://stackoverflow.com/questions/12970284/moment-js-24h-format) Setting a 24h format from moment.js
+
+####  **Stephany Bolivar** 
+*  **Github:** [@gstephbolivar](https://github.com/gstephbolivar)
+*  **Email:** [g.stephanybolivar@gmail.com](g.stephanybolivar@gmail.com)
 
 ## License
 
